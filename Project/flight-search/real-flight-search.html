@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厦门飞北京商务舱机票搜索 - 实时数据</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .search-status {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .real-search-info {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        
+        .api-sources {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            color: #6a1b9a;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        
+        .manual-entry {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            color: #1565c0;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        
+        .input-group {
+            margin: 10px 0;
+        }
+        
+        .input-group label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+        
+        .input-group input, .input-group select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+        
+        .btn {
+            background: #2196f3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background: #1976d2;
+        }
+        
+        .flight-results {
+            display: none;
+            padding: 20px;
+        }
+        
+        .flight-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .best-deal {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+        }
+        
+        .price-highlight {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .best-deal .price-highlight {
+            color: white;
+        }
+        
+        .update-time {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 厦门飞北京商务舱实时搜索</h1>
+            <p>专业航班数据聚合 - 多源实时比价</p>
+        </div>
+        
+        <div class="real-search-info">
+            <h3>📋 真实数据搜索说明</h3>
+            <p>由于需要API密钥才能访问实时航班数据，我提供了以下几种获取真实数据的方法：</p>
+        </div>
+        
+        <div class="api-sources">
+            <h3>🔌 可用API数据源</h3>
+            <ul>
+                <li><strong>Skyscanner API:</strong> 免费套餐，需要注册获取API Key</li>
+                <li><strong>Amadeus API:</strong> 提供航班搜索，需要开发者账号</li>
+                <li><strong>携程开放平台:</strong> 需要企业认证和API申请</li>
+                <li><strong>去哪儿API:</strong> 合作伙伴计划，需要审核</li>
+                <li><strong>飞常准API:</strong> 航班动态数据，需要申请</li>
+            </ul>
+        </div>
+        
+        <div class="manual-entry">
+            <h3>✈️ 手动输入实时数据</h3>
+            <p>请帮我填入你从以下网站搜索到的真实数据：</p>
+            
+            <div style="margin: 15px 0;">
+                <strong>推荐搜索网站：</strong>
+                <ul>
+                    <li>📱 <a href="https://www.ctrip.com" target="_blank">携程旅行网</a></li>
+                    <li>📱 <a href="https://flight.qunar.com" target="_blank">去哪儿机票</a></li>
+                    <li>📱 <a href="https://www.skyscanner.com" target="_blank">Skyscanner</a></li>
+                    <li>📱 <a href="https://www.expedia.com" target="_blank">Expedia</a></li>
+                </ul>
+            </div>
+            
+            <div class="input-group">
+                <label>搜索日期：</label>
+                <input type="date" id="searchDate" value="2026-02-06">
+            </div>
+            
+            <div class="input-group">
+                <label>航线：</label>
+                <select id="route">
+                    <option value="XMN-PEK">厦门高崎 → 北京首都</option>
+                    <option value="XMN-PKX">厦门高崎 → 北京大兴</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="showDataEntry()">添加航班数据</button>
+            <button class="btn" onclick="loadSampleData()">加载示例对比数据</button>
+        </div>
+        
+        <div id="dataEntry" style="display: none; background: #f8f9fa; padding: 20px; margin: 20px; border-radius: 10px;">
+            <h4>📝 添加航班信息</h4>
+            <div class="input-group">
+                <label>航空公司：</label>
+                <input type="text" id="airline" placeholder="如：中国国际航空">
+            </div>
+            <div class="input-group">
+                <label>航班号：</label>
+                <input type="text" id="flightNumber" placeholder="如：CA9582">
+            </div>
+            <div class="input-group">
+                <label>起飞时间：</label>
+                <input type="time" id="departureTime">
+            </div>
+            <div class="input-group">
+                <label>到达时间：</label>
+                <input type="time" id="arrivalTime">
+            </div>
+            <div class="input-group">
+                <label>价格(元)：</label>
+                <input type="number" id="price" placeholder="如：3280">
+            </div>
+            <button class="btn" onclick="addFlight()">添加航班</button>
+            <button class="btn" onclick="hideDataEntry()">取消</button>
+        </div>
+        
+        <div id="flightResults" class="flight-results">
+            <h3>🛫 搜索结果</h3>
+            <div id="bestDeal"></div>
+            <div id="otherFlights"></div>
+            <div class="update-time">
+                数据更新时间：<span id="updateTime"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let flightData = [];
+        
+        function showDataEntry() {
+            document.getElementById('dataEntry').style.display = 'block';
+        }
+        
+        function hideDataEntry() {
+            document.getElementById('dataEntry').style.display = 'none';
+        }
+        
+        function addFlight() {
+            const flight = {
+                airline: document.getElementById('airline').value,
+                flightNumber: document.getElementById('flightNumber').value,
+                departureTime: document.getElementById('departureTime').value,
+                arrivalTime: document.getElementById('arrivalTime').value,
+                price: parseInt(document.getElementById('price').value),
+                duration: calculateDuration(document.getElementById('departureTime').value, document.getElementById('arrivalTime').value)
+            };
+            
+            flightData.push(flight);
+            updateDisplay();
+            hideDataEntry();
+            clearForm();
+        }
+        
+        function calculateDuration(depTime, arrTime) {
+            const dep = new Date(`2000-01-01T${depTime}`);
+            const arr = new Date(`2000-01-01T${arrTime}`);
+            if (arr < dep) arr.setDate(arr.getDate() + 1);
+            
+            const diff = arr - dep;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            return `${hours}小时${minutes}分钟`;
+        }
+        
+        function clearForm() {
+            document.getElementById('airline').value = '';
+            document.getElementById('flightNumber').value = '';
+            document.getElementById('departureTime').value = '';
+            document.getElementById('arrivalTime').value = '';
+            document.getElementById('price').value = '';
+        }
+        
+        function loadSampleData() {
+            flightData = [
+                {
+                    airline: "中国国际航空",
+                    flightNumber: "CA9582",
+                    departureTime: "08:30",
+                    arrivalTime: "11:15",
+                    price: 3280,
+                    duration: "2小时45分钟",
+                    features: ["免费退改", "里程累积100%", "全服务"]
+                },
+                {
+                    airline: "厦门航空",
+                    flightNumber: "MF8101",
+                    departureTime: "07:20",
+                    arrivalTime: "10:10",
+                    price: 3580,
+                    duration: "2小时50分钟",
+                    features: ["厦航白鹭会员", "免费餐食", "优先登机"]
+                },
+                {
+                    airline: "南方航空",
+                    flightNumber: "CZ378",
+                    departureTime: "09:45",
+                    arrivalTime: "12:35",
+                    price: 3450,
+                    duration: "2小时50分钟",
+                    features: ["南航明珠会员", "大兴机场", "免费WiFi"]
+                }
+            ];
+            
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            if (flightData.length === 0) return;
+            
+            // 按价格排序
+            flightData.sort((a, b) => a.price - b.price);
+            
+            const bestDeal = flightData[0];
+            const otherFlights = flightData.slice(1);
+            
+            // 显示最佳性价比
+            document.getElementById('bestDeal').innerHTML = `
+                <div class="flight-card best-deal">
+                    <h3>🏆 最佳性价比推荐</h3>
+                    <h4>${bestDeal.airline} ${bestDeal.flightNumber}</h4>
+                    <p><strong>时间：</strong> ${bestDeal.departureTime} → ${bestDeal.arrivalTime} (${bestDeal.duration})</p>
+                    <p><strong>价格：</strong> <span class="price-highlight">¥${bestDeal.price.toLocaleString()}</span></p>
+                    <p><strong>特色：</strong> ${bestDeal.features.join(' • ')}</p>
+                </div>
+            `;
+            
+            // 显示其他航班
+            let otherHtml = '<h4>其他商务舱选择：</h4>';
+            otherFlights.forEach(flight => {
+                otherHtml += `
+                    <div class="flight-card">
+                        <h4>${flight.airline} ${flight.flightNumber}</h4>
+                        <p><strong>时间：</strong> ${flight.departureTime} → ${flight.arrivalTime} (${flight.duration})</p>
+                        <p><strong>价格：</strong> <span class="price-highlight">¥${flight.price.toLocaleString()}</span></p>
+                        <p><strong>特色：</strong> ${flight.features.join(' • ')}</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('otherFlights').innerHTML = otherHtml;
+            document.getElementById('flightResults').style.display = 'block';
+            document.getElementById('updateTime').textContent = new Date().toLocaleString();
+        }
+        
+        // 设置默认日期为明天
+        document.getElementById('searchDate').value = new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0];
+    </script>
+</body>
+</html>

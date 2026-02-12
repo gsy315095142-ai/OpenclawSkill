@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手势交互需求1.0</title>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --accent: #9b59b6;
+            --combat: #e74c3c;
+            --system: #f39c12;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #ecf0f1;
+            --text-sub: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-sub);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            margin: 50px 0 25px 0;
+            padding-left: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .section-icon {
+            margin-right: 15px;
+            font-size: 1.5em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,210,255,0.15);
+            border-color: var(--primary);
+        }
+
+        .card-img-placeholder {
+            height: 120px;
+            background: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .gesture-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .bg-basic { background: rgba(0, 210, 255, 0.2); color: var(--primary); }
+        .bg-combat { background: rgba(231, 76, 60, 0.2); color: var(--combat); }
+        .bg-magic { background: rgba(155, 89, 182, 0.2); color: var(--accent); }
+        .bg-sys { background: rgba(243, 156, 18, 0.2); color: var(--system); }
+
+        .info-row {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .desc-text {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .action-list li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 4px;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+        
+        .action-list li::before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>手势交互需求1.0</h1>
+        <div class="subtitle">Design Spec v1.0 | 按动作幅度分类</div>
+    </header>
+
+    <!-- 01. 微交互 (指尖与手部) -->
+    <div class="section-title">
+        <span class="section-icon">🤏</span> 微手势 - 手指精细操作 (Micro Gestures)
+    </div>
+    <div class="grid">
+        <!-- 摊开手掌 -->
+        <div class="card">
+            <div class="card-img-placeholder">✋</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">摊开手掌 (Open Palm)</div>
+                    <span class="badge bg-basic">Signal</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">五指自然张开，手掌摊平。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>停止/拒绝信号 (面对目标)。</li>
+                        <li>唤出掌心菜单 (手心朝己)。</li>
+                        <li>释放冲击波 (需用力推出)。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 捏合 (整合了拖拽) -->
+        <div class="card">
+            <div class="card-img-placeholder">👌</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">捏合 (Pinch)</div>
+                    <span class="badge bg-basic">Core</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">
+                        拇指与食指指尖快速接触再松开。<br>
+                        <span style="color: var(--primary); font-size: 0.85em;">💡 如果捏住不放的同时进行移动，可以进行滑动调整。</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>UI 确认与点击。</li>
+                        <li>拾取微小物体 (硬币/钥匙)。</li>
+                        <li>滚动列表 / 调节滑块 (长按)。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 戳/点 -->
+        <div class="card">
+            <div class="card-img-placeholder">👉</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">戳/点 (Poke)</div>
+                    <span class="badge bg-basic">Direct</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">伸出食指，直接触碰虚拟表面。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>输入密码/全息键盘。</li>
+                        <li>按下电梯按钮。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 握拳 -->
+        <div class="card">
+            <div class="card-img-placeholder">✊</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">握拳 (Fist)</div>
+                    <span class="badge bg-combat">Physics</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">五指用力向掌心握紧。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>吸附/抓取远处的石块或敌人。</li>
+                        <li>攀爬时抓住落脚点。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手枪指 -->
+        <div class="card">
+            <div class="card-img-placeholder">🔫</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">手枪指 (Gun)</div>
+                    <span class="badge bg-combat">Range</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">伸出拇指和食指呈 L 型。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>发射魔法飞弹 (Magic Missile)。</li>
+                        <li>远距离精准点选。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 蜘蛛手 -->
+        <div class="card">
+            <div class="card-img-placeholder">🤘</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">蜘蛛手 (Web)</div>
+                    <span class="badge bg-magic">Loco</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">食指小指伸出 (Rock手势)。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>发射钩锁移动。</li>
+                        <li>牵引拉近敌人。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 竖大拇指 -->
+        <div class="card">
+            <div class="card-img-placeholder">👍</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">竖大拇指 (Thumbs Up)</div>
+                    <span class="badge bg-basic">Social</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">握拳并竖起拇指。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>点赞 / 确认 (Social)。</li>
+                        <li>给队友发送信号。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 02. 大幅动作 (肢体与手臂) -->
+    <div class="section-title">
+        <span class="section-icon">💪</span> 大幅动作 (Macro Gestures)
+    </div>
+    <div class="grid">
+        <!-- 手臂前伸 -->
+        <div class="card">
+            <div class="card-img-placeholder">🤳</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">手臂前伸 (Reach)</div>
+                    <span class="badge bg-basic">Nav</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">整条手臂向目标方向自然伸出。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>发出手部射线 (Ray-casting)。</li>
+                        <li>暗影之手抓取远处机关。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 挥动 (向下) -->
+        <div class="card">
+            <div class="card-img-placeholder">⏬</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">向下挥动 (Swipe Down)</div>
+                    <span class="badge bg-combat">Heavy</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">手臂抬起后快速垂直向下砸/挥。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>重击 (Slam) / 召唤落雷。</li>
+                        <li>关闭当前悬浮窗。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 挥动 (向上) -->
+        <div class="card">
+            <div class="card-img-placeholder">⏫</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">向上挥动 (Swipe Up)</div>
+                    <span class="badge bg-combat">Launch</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">手臂从下往上快速提拉/挥动。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>升龙拳 (将敌人挑飞)。</li>
+                        <li>打开背包/地图。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 双手交叉 -->
+        <div class="card">
+            <div class="card-img-placeholder">🙅‍♂️</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="gesture-name">双手交叉 (Cross)</div>
+                    <span class="badge bg-sys">Defense</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">动作说明 Description</span>
+                    <div class="desc-text">双臂在胸前呈 X 形交叉。</div>
+                </div>
+                <div class="info-row">
+                    <span class="label">交互应用 Interaction</span>
+                    <ul class="desc-text action-list">
+                        <li>终极防御 (X-Guard)。</li>
+                        <li>呼出系统/暂停菜单。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Generated by Clawd | Last Updated: 2026-02-10 10:44</p>
+    </footer>
+</div>
+
+</body>
+</html>

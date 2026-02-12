@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>击剑规则详解 - 基于小红书调研</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b6b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "⚔️";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .fencing-rules {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #e3f2fd;
+        }
+        
+        .weapon-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .weapon-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .weapon-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .weapon-icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        
+        .rule-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .rule-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-right: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        
+        tr:hover td {
+            background-color: #f8f9ff;
+        }
+        
+        .post-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .author {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .date {
+            color: #888;
+            font-size: 0.85em;
+        }
+        
+        .likes {
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+        
+        .content-summary {
+            color: #555;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .quick-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffa500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .reference-section {
+            background: #f0f8ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #e3f2fd;
+        }
+        
+        .reference-title {
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .weapon-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-tips {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ 击剑规则完全指南</h1>
+            <p>基于小红书热门内容整理的击剑规则详解</p>
+        </div>
+        
+        <div class="content">
+            <!-- 上半部分：击剑规则详解 -->
+            <div class="section">
+                <h2 class="section-title">🎯 击剑运动基础规则</h2>
+                
+                <div class="fencing-rules">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">🏆 什么是击剑？</h3>
+                    <p style="line-height: 1.6; color: #555;">
+                        击剑是一项历史悠久的奥运项目，起源于欧洲的剑术决斗。现代击剑分为三个剑种：花剑、重剑和佩剑。
+                        每项都有个人赛和团体赛，男女分别设置，是奥运会最具观赏性的项目之一。
+                    </p>
+                </div>
+
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">⚔️ 三个剑种核心区别</h3>
+                <div class="weapon-comparison">
+                    <div class="weapon-card">
+                        <div class="weapon-title">
+                            <span class="weapon-icon">🌸</span>
+                            花剑（Foil）- 优雅派
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">有效部位：</span>躯干（不含四肢）
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">得分方式：</span>只能刺击，剑尖刺中有效
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">优先权：</span>有主动进攻权规则
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">特点：</span>技巧性最强，讲究精准度，像格斗象棋
+                        </div>
+                    </div>
+                    
+                    <div class="weapon-card">
+                        <div class="weapon-title">
+                            <span class="weapon-icon">⚔️</span>
+                            重剑（Épée）- 实战派
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">有效部位：</span>全身（含手脚）
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">得分方式：</span>刺击中即得分，简单粗暴
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">优先权：</span>无优先权，双中同时得分
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">特点：</span>最贴近实战，节奏相对慢
+                        </div>
+                    </div>
+                    
+                    <div class="weapon-card">
+                        <div class="weapon-title">
+                            <span class="weapon-icon">⚡</span>
+                            佩剑（Sabre）- 速度派
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">有效部位：</span>上半身（含手臂和头部）
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">得分方式：</span>能刺也能砍，速度超快
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">优先权：</span>有主动进攻权规则
+                        </div>
+                        <div class="rule-item">
+                            <span class="rule-label">特点：</span>速度最快，比赛最有爆炸性
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">📊 比赛规则要点</h3>
+                <div class="highlight-box">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div>
+                            <h4 style="color: #ff6b6b; margin-bottom: 10px;">🏆 得分系统</h4>
+                            <div class="rule-item">每场比赛3局，每局3分钟</div>
+                            <div class="rule-item">先达到15分获胜，或时间结束分数高者胜</div>
+                            <div class="rule-item">平局进行1分钟突然死亡加时赛</div>
+                        </div>
+                        <div>
+                            <h4 style="color: #ff6b6b; margin-bottom: 10px;">⚖️ 优先权规则（花剑&佩剑）</h4>
+                            <div class="rule-item">主动发起进攻方获得优先权</div>
+                            <div class="rule-item">防守方必须化解进攻后才能得分</div>
+                            <div class="rule-item">同时击中时，有优先权方得分</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">🎯 观赛快速入门</h3>
+                <div class="quick-tips">
+                    <div class="tip-card">
+                        <div class="tip-title">💡 看灯</div>
+                        <div>谁亮灯谁得分，这是最直观的判断方式</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">🎯 看部位</div>
+                        <div>不同剑种有效区域不同，注意区分</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">⚡ 看动作</div>
+                        <div>刺vs劈，速度和技术差很多</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">🎭 看战术</div>
+                        <div>假动作、反击、节奏变化很精彩</div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">🏅 奥运项目设置</h3>
+                <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div class="rule-item">
+                            <strong>个人项目（6项）：</strong><br>
+                            男子花剑个人、男子重剑个人、男子佩剑个人<br>
+                            女子花剑个人、女子重剑个人、女子佩剑个人
+                        </div>
+                        <div class="rule-item">
+                            <strong>团体项目（6项）：</strong><br>
+                            男子花剑团体、男子重剑团体、男子佩剑团体<br>
+                            女子花剑团体、女子重剑团体、女子佩剑团体
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">💡 冷知识&小贴士</h3>
+                <div class="highlight-box">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div class="rule-item">
+                            <strong>🛡️ 击剑服能防弹！</strong><br>
+                            专业击剑服用防弹材料制作，确保安全
+                        </div>
+                        <div class="rule-item">
+                            <strong>🔌 背后的"绳子"是电线</strong><br>
+                            连接电子计分系统，自动记录有效击中
+                        </div>
+                        <div class="rule-item">
+                            <strong>⚖️ 重量差异很大</strong><br>
+                            重剑最重（770g），花剑最轻（500g）
+                        </div>
+                        <div class="rule-item">
+                            <strong>🎯 面罩视野有限</strong><br>
+                            运动员只能看到正前方，侧面需要转头
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下半部分：小红书参考资料 -->
+            <div class="section">
+                <div class="reference-section">
+                    <div class="reference-title">📱 小红书参考资料来源</div>
+                    <p style="text-align: center; color: #666; margin-bottom: 25px;">
+                        以下是小红书平台上关于击剑规则的热门帖子，为本文内容提供参考依据
+                    </p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>帖子标题</th>
+                                <th>作者</th>
+                                <th>发布时间</th>
+                                <th>点赞数</th>
+                                <th>核心内容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td class="post-title">🤺什么是重剑、花剑、佩剑</td>
+                                <td class="author">南山许栩</td>
+                                <td class="date">2023-08-30</td>
+                                <td class="likes">1493</td>
+                                <td class="content-summary">详细解释三个剑种的区别，包括有效部位、进攻方式、规则差异</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="post-title">击剑裁判手势与口令🤺</td>
+                                <td class="author">小P的学剑日记</td>
+                                <td class="date">2025-12-21</td>
+                                <td class="likes">69</td>
+                                <td class="content-summary">介绍击剑比赛中的裁判手势和口令含义</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="post-title">🇸🇬 你不能不知道的击剑规则</td>
+                                <td class="author">傑</td>
+                                <td class="date">2025-03-05</td>
+                                <td class="likes">29</td>
+                                <td class="content-summary">新加坡视角的击剑规则介绍，规则解析清晰</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="post-title">击剑规则 武器篇之佩剑</td>
+                                <td class="author">小妖变老妖</td>
+                                <td class="date">2025-04-03</td>
+                                <td class="likes">13</td>
+                                <td class="content-summary">专门介绍佩剑的规则和技巧，深度专业</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="post-title">一分钟，看懂击剑规则</td>
+                                <td class="author">南京运动家击剑-华彩荟店</td>
+                                <td class="date">2021-06-18</td>
+                                <td class="likes">3158</td>
+                                <td class="content-summary">快速入门击剑规则，简洁明了</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="post-title">为什么击剑运动员背后要系一根"绳子"</td>
+                                <td class="author">Lucas</td>
+                                <td class="date">2025-10-31</td>
+                                <td class="likes">12</td>
+                                <td class="content-summary">解释击剑装备中的电线作用，解答常见疑问</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td class="post-title">击剑的详细规则</td>
+                                <td class="author">剑客</td>
+                                <td class="date">2025-03-08</td>
+                                <td class="likes">59</td>
+                                <td class="content-summary">全面介绍击剑比赛规则，内容详实</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td class="post-title">如何看懂击剑比赛！1分钟学会！</td>
+                                <td class="author">OSPACE-元空间超体倍健</td>
+                                <td class="date">2025-11-22</td>
+                                <td class="likes">55</td>
+                                <td class="content-summary">快速学会观看击剑比赛，观赛指南</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td class="post-title">击剑三个剑种比赛，一张图讲清楚~</td>
+                                <td class="author">万国体育击剑馆</td>
+                                <td class="date">2024-04-17</td>
+                                <td class="likes">104</td>
+                                <td class="content-summary">用图表对比三个剑种，可视化展示</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td class="post-title">你以为的击剑比赛vs真实的击剑比赛~</td>
+                                <td class="author">一于宇</td>
+                                <td class="date">2024-04-10</td>
+                                <td class="likes">2062</td>
+                                <td class="content-summary">对比大众认知与实际击剑比赛，反差感强</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin-top: 30px; background: white; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #667eea; margin-bottom: 15px;">📊 小红书内容分析总结</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                            <div class="rule-item">
+                                <strong>🔥 热门话题类型</strong><br>
+                                三剑种对比、快速入门、装备科普、观赛指南、误区纠正
+                            </div>
+                            <div class="rule-item">
+                                <strong>📱 内容特点</strong><br>
+                                视觉化、简洁性、实用性、专业性、互动性
+                            </div>
+                            <div class="rule-item">
+                                <strong>⚡ 高互动元素</strong><br>
+                                对比式内容、数字列表、视觉图表、问答形式、专业背书
+                            </div>
+                            <div class="rule-item">
+                                <strong>🎯 创作建议</strong><br>
+                                标题要有钩子、内容简洁实用、形式视觉化、标签精准、互动引导
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📊 数据统计时间：2026年2月 | 🔍 调研平台：小红书 | 📱 分析工具：OpenClaw</p>
+        </div>
+    </div>
+    
+    <script>
+        // 添加一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 表格行点击效果
+            const tableRows = document.querySelectorAll('tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    this.style.backgroundColor = '#e3f2fd';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                    }, 200);
+                });
+            });
+            
+            // 武器卡片悬停效果
+            const weaponCards = document.querySelectorAll('.weapon-card');
+            weaponCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // 添加CSS动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(30px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                .weapon-card {
+                    transition: all 0.3s ease;
+                }
+                
+                .weapon-card:hover {
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

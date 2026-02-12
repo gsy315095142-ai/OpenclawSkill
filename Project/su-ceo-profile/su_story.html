@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苏总裁 | AR+AI 科技领航者</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
+                        surface: '#1e293b',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(15,23,42,0) 70%);
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .project-img {
+            transition: transform 0.5s ease;
+        }
+        .project-item:hover .project-img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white overflow-x-hidden">
+
+    <!-- 背景光效 -->
+    <div class="hero-glow animate-pulse-slow"></div>
+    <div class="fixed inset-0 z-[-2] bg-[#0f172a]"></div>
+    <img src="https://images.unsplash.com/photo-1617802690992-8618015437df?q=80&w=2000&auto=format&fit=crop" class="fixed inset-0 z-[-1] opacity-20 object-cover w-full h-full mix-blend-overlay" alt="bg">
+
+    <!-- 导航/头部 -->
+    <header class="relative pt-32 pb-20 px-6 mb-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 text-center md:text-left z-10">
+                <div class="inline-block mb-6 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium tracking-wide animate-float">
+                    VISIONARY LEADER
+                </div>
+                <h1 class="font-display text-6xl md:text-7xl font-bold mb-6 tracking-tight gradient-text leading-tight">苏总裁<br><span class="text-white text-5xl md:text-6xl">事迹整理</span></h1>
+                <p class="text-slate-400 text-xl font-light max-w-xl leading-relaxed mb-8">
+                    以 <span class="text-white font-medium">XR空间叙事科技</span> 重构场景体验<br>
+                    深耕泛文旅领域十余年的 AR+AI 先行者
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <span class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors cursor-pointer shadow-lg shadow-blue-500/20">查看成就</span>
+                    <span class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg font-medium transition-colors cursor-pointer">联系合作</span>
+                </div>
+            </div>
+            
+            <!-- Hero Image / Avatar Placeholder -->
+            <div class="flex-1 relative w-full max-w-md md:max-w-full">
+                <div class="relative rounded-2xl overflow-hidden glass-panel p-2 shadow-2xl animate-float" style="animation-delay: 1s;">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop" alt="苏总裁形象" class="rounded-xl w-full object-cover h-[400px]">
+                    <div class="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="text-white font-bold text-lg">苏砚</div>
+                        <div class="text-blue-400 text-sm">小签科技创始人兼CEO</div>
+                    </div>
+                </div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl z-[-1]"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl z-[-1]"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容容器 -->
+    <main class="max-w-6xl mx-auto px-6 space-y-32 pb-32">
+        
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">👤</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">基本信息</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="space-y-6 text-lg text-slate-300 leading-relaxed"><div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">姓名</div>
+                        <div class="text-white font-medium text-lg">苏砚</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">职务</div>
+                        <div class="text-white font-medium text-lg">创始人兼CEO、法定代表人</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">公司</div>
+                        <div class="text-white font-medium text-lg">小签科技（北京）有限公司</div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="text-slate-500 text-xs uppercase tracking-wider mb-1">行业领域</div>
+                        <div class="text-white font-medium text-lg">AR+AI科技 / 文旅数字化</div>
+                    </div></div>
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">🏢</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">公司简介</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="space-y-6 text-lg text-slate-300 leading-relaxed"><p>小签科技成立于2015年，总部位于厦门，是中国首批AR+AI科技企业之一。公司以XR空间叙事科技重构场景体验为核心，深耕泛文旅领域十余年。融资历程：2017年获谷银基金领投的数千万PreA轮融资。</p>
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">🚀</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">发展历程</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="relative pl-8 border-l border-slate-700 ml-3 space-y-12 py-4">
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2015年</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">母公司厦门市礼小签电子科技有限公司成立。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2016年9月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">小签科技（北京）有限公司成立。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2016年11月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">入围XTC全球创业精英挑战赛中国站决赛十强。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2017年3月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">与永定土楼签订AR项目合作。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2017年6月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">完成数千万PreA轮融资。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2017年7月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">与曾厝垵合作打造全国首个AR旅游村；同月与西安半坡博物馆合作。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2020年9月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">神奇系统（室内版）上线。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2020年12月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">神奇系统（户外版）上线。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2021年6月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">数字文旅实训中心搭建完毕。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2021年9月</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">成为国内AR文旅行业引导者。</p>
+                    </div>
+                </div>
+                
+                <div class="relative group pl-8 border-l border-slate-800 ml-3 pb-8 last:pb-0 last:border-0">
+                    <span class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-slate-600 group-hover:bg-blue-500 group-hover:scale-150 transition-all duration-300 shadow-[0_0_0_4px_rgba(15,23,42,1)] z-10"></span>
+                    <div class="group-hover:translate-x-2 transition-transform duration-300 glass-panel p-4 rounded-xl -mt-2">
+                        <span class="inline-block text-blue-400 text-sm font-bold mb-1 font-display tracking-wider">2025年</span>
+                        <p class="text-slate-300 text-lg group-hover:text-white transition-colors">联合潘氏集团投资布局XR硬件生态。</p>
+                    </div>
+                </div>
+                </div></div>
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">💎</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">核心产品体系</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-2xl hover:bg-slate-800/80 transition-all duration-300 group flex flex-col h-full border border-white/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 relative overflow-hidden">
+                    
+                    <!-- 卡片顶部大图 -->
+                    <div class="h-48 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-blue-900/20 z-10 group-hover:bg-transparent transition-colors"></div>
+                         <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="4.1 神奇系统">
+                         <div class="absolute bottom-4 left-4 z-20">
+                             <span class="inline-block px-3 py-1 bg-black/50 backdrop-blur-md text-white border border-white/10 text-xs font-bold rounded-lg">4.1</span>
+                         </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="mb-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">神奇系统</h3>
+                        </div>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-grow border-b border-slate-700/50 pb-6">基于自主研发的空间地图引擎，实现户外AR剧情、寻宝、导览模式。</p>
+                        
+                        <ul class="space-y-3 mt-auto">
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>户外场景地图系统</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>场景玩法包系统</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>场景商业营销系统</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>游客积分互动系统</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>KOL创作平台系统</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400 text-sm">
+                            <span class="text-blue-500 mt-1">✓</span>
+                            <span>大数据分析系统</span>
+                        </li></ul>
+                        
+                        <div class="mt-8 pt-4 border-t border-slate-800 flex items-center text-blue-400 text-sm font-medium group/btn cursor-pointer">
+                            <span>探索详情</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-panel rounded-2xl hover:bg-slate-800/80 transition-all duration-300 group flex flex-col h-full border border-white/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 relative overflow-hidden">
+                    
+                    <!-- 卡片顶部大图 -->
+                    <div class="h-48 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-blue-900/20 z-10 group-hover:bg-transparent transition-colors"></div>
+                         <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="4.2 绿洲系统">
+                         <div class="absolute bottom-4 left-4 z-20">
+                             <span class="inline-block px-3 py-1 bg-black/50 backdrop-blur-md text-white border border-white/10 text-xs font-bold rounded-lg">4.2</span>
+                         </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="mb-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">绿洲系统</h3>
+                        </div>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-grow border-b border-slate-700/50 pb-6">专注室内场景的数字化重构，提供高精度室内定位导航及空间营销解决方案。</p>
+                        
+                        
+                        
+                        <div class="mt-8 pt-4 border-t border-slate-800 flex items-center text-blue-400 text-sm font-medium group/btn cursor-pointer">
+                            <span>探索详情</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-panel rounded-2xl hover:bg-slate-800/80 transition-all duration-300 group flex flex-col h-full border border-white/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 relative overflow-hidden">
+                    
+                    <!-- 卡片顶部大图 -->
+                    <div class="h-48 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-blue-900/20 z-10 group-hover:bg-transparent transition-colors"></div>
+                         <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="4.3 数字文旅实训中心">
+                         <div class="absolute bottom-4 left-4 z-20">
+                             <span class="inline-block px-3 py-1 bg-black/50 backdrop-blur-md text-white border border-white/10 text-xs font-bold rounded-lg">4.3</span>
+                         </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="mb-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">数字文旅实训中心</h3>
+                        </div>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-grow border-b border-slate-700/50 pb-6">为院校文旅专业提供实训室规划设计、软硬件资源库搭建。</p>
+                        
+                        
+                        
+                        <div class="mt-8 pt-4 border-t border-slate-800 flex items-center text-blue-400 text-sm font-medium group/btn cursor-pointer">
+                            <span>探索详情</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">🏆</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">标杆项目</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="space-y-6 text-lg text-slate-300 leading-relaxed"><p>苏砚总亲自领导打造标杆项目，覆盖故宫、鼓浪屿等数百家泛文旅场景。</p>
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-6 hover:border-blue-500/30 transition-all project-item hover:bg-slate-800/50">
+                <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover project-img" alt="Project">
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="w-6 h-6 flex items-center justify-center bg-blue-500/20 text-blue-400 font-bold rounded text-xs border border-blue-500/30">1</span>
+                        <span class="text-white text-lg font-bold">西安半坡博物馆</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">AR+博物馆教育落地。</p>
+                </div>
+            </div>
+            
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-6 hover:border-blue-500/30 transition-all project-item hover:bg-slate-800/50">
+                <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1599571340176-9d32789115f2?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover project-img" alt="Project">
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="w-6 h-6 flex items-center justify-center bg-blue-500/20 text-blue-400 font-bold rounded text-xs border border-blue-500/30">2</span>
+                        <span class="text-white text-lg font-bold">故宫</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">合作开发AR导览系统。</p>
+                </div>
+            </div>
+            
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-6 hover:border-blue-500/30 transition-all project-item hover:bg-slate-800/50">
+                <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1536254581290-0b6dc0f89d31?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover project-img" alt="Project">
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="w-6 h-6 flex items-center justify-center bg-blue-500/20 text-blue-400 font-bold rounded text-xs border border-blue-500/30">3</span>
+                        <span class="text-white text-lg font-bold">永定土楼</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">科技赋能传统建筑。</p>
+                </div>
+            </div>
+            
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-6 hover:border-blue-500/30 transition-all project-item hover:bg-slate-800/50">
+                <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1548983965-070ded643c16?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover project-img" alt="Project">
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="w-6 h-6 flex items-center justify-center bg-blue-500/20 text-blue-400 font-bold rounded text-xs border border-blue-500/30">4</span>
+                        <span class="text-white text-lg font-bold">曾厝垵</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">打造全国首个AR旅游村。</p>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">🎖️</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">公司荣誉</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="space-y-6 text-lg text-slate-300 leading-relaxed">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                    <span class="text-slate-300 text-lg">XTC全球创业精英挑战赛中国站决赛十强</span>
+                </div>
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                    <span class="text-slate-300 text-lg">国内AR文旅行业引导者</span>
+                </div>
+            <div class="mb-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-2xl">🌟</span>
+                    <h2 class="font-display text-3xl font-bold text-white tracking-wide">企业愿景</h2>
+                    <div class="h-px bg-slate-800 flex-grow ml-4"></div>
+                </div>
+            <div class="space-y-6 text-lg text-slate-300 leading-relaxed"><p>以XR空间叙事科技重构场景体验，持续深耕泛文旅领域。</p><p>附注
+文档整理时间：2026年2月7日</p></div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="border-t border-slate-800 py-12 text-center text-slate-500 text-sm">
+        <p class="mb-2">Generated by OpenClaw · Powered by Gemini 3 Pro</p>
+        <p>文档数据同步时间：2026年2月7日</p>
+    </footer>
+
+</body>
+</html>

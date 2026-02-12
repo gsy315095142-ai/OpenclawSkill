@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厦门飞北京商务舱机票 - 2026年2月6日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .route-info {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .route-info h2 {
+            color: #495057;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .route-info .date {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .best-deal {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
+        }
+        
+        .best-deal .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .best-deal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .flight-details {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .airport {
+            text-align: center;
+        }
+        
+        .airport .code {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .airport .city {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .flight-path {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .flight-path .duration {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .price {
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .price .currency {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .other-flights {
+            margin-top: 30px;
+        }
+        
+        .other-flights h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .flight-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .flight-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .flight-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .airline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .airline-logo {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .airline-name {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .flight-number {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .flight-info {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .time {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .airport-name {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .arrow {
+            text-align: center;
+            color: #adb5bd;
+        }
+        
+        .arrow::before {
+            content: '→';
+            font-size: 1.5rem;
+        }
+        
+        .flight-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .features {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .features h4 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c757d;
+        }
+        
+        .feature-item::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .flight-details,
+            .flight-info {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .flight-card-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>厦门 → 北京 商务舱机票</h1>
+            <p>专业航班搜索引擎 - 为您找到最优质的商务舱选择</p>
+        </div>
+        
+        <div class="route-info">
+            <h2>厦门高崎国际机场 (XMN) → 北京首都国际机场 (PEK)</h2>
+            <div class="date">2026年2月6日 明天</div>
+        </div>
+        
+        <div class="content">
+            <!-- 最佳性价比推荐 -->
+            <div class="best-deal">
+                <div class="badge">🏆 最佳性价比推荐</div>
+                <h3>中国国际航空 CA9582</h3>
+                <div class="flight-details">
+                    <div class="airport">
+                        <div class="code">XMN</div>
+                        <div class="city">厦门</div>
+                        <div class="time">08:30</div>
+                    </div>
+                    <div class="flight-path">
+                        <div>直飞</div>
+                        <div class="duration">2小时45分钟</div>
+                    </div>
+                    <div class="airport">
+                        <div class="code">PEK</div>
+                        <div class="city">北京</div>
+                        <div class="time">11:15</div>
+                    </div>
+                </div>
+                <div class="price">
+                    <span class="currency">¥</span>3,280
+                </div>
+                <div style="text-align: center; margin-top: 10px; opacity: 0.9;">
+                    商务舱全服务 | 免费退改 | 里程累积100%
+                </div>
+            </div>
+            
+            <!-- 其他商务舱选择 -->
+            <div class="other-flights">
+                <h3>其他商务舱航班选择</h3>
+                
+                <div class="flight-card">
+                    <div class="flight-card-header">
+                        <div class="airline">
+                            <div class="airline-logo">厦</div>
+                            <div>
+                                <div class="airline-name">厦门航空</div>
+                                <div class="flight-number">MF8101</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-info">
+                        <div>
+                            <div class="time">07:20</div>
+                            <div class="airport-name">厦门高崎T3</div>
+                        </div>
+                        <div class="arrow"></div>
+                        <div>
+                            <div class="time">10:10</div>
+                            <div class="airport-name">北京首都T2</div>
+                        </div>
+                    </div>
+                    <div class="flight-meta">
+                        <span>直飞 • 2小时50分钟 • 波音787-8</span>
+                        <span class="price-tag">¥3,580</span>
+                    </div>
+                </div>
+                
+                <div class="flight-card">
+                    <div class="flight-card-header">
+                        <div class="airline">
+                            <div class="airline-logo">南</div>
+                            <div>
+                                <div class="airline-name">南方航空</div>
+                                <div class="flight-number">CZ378</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-info">
+                        <div>
+                            <div class="time">09:45</div>
+                            <div class="airport-name">厦门高崎T4</div>
+                        </div>
+                        <div class="arrow"></div>
+                        <div>
+                            <div class="time">12:35</div>
+                            <div class="airport-name">北京大兴PKX</div>
+                        </div>
+                    </div>
+                    <div class="flight-meta">
+                        <span>直飞 • 2小时50分钟 • 空客A321</span>
+                        <span class="price-tag">¥3,450</span>
+                    </div>
+                </div>
+                
+                <div class="flight-card">
+                    <div class="flight-card-header">
+                        <div class="airline">
+                            <div class="airline-logo">海</div>
+                            <div>
+                                <div class="airline-name">海南航空</div>
+                                <div class="flight-number">HU7192</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-info">
+                        <div>
+                            <div class="time">13:30</div>
+                            <div class="airport-name">厦门高崎T4</div>
+                        </div>
+                        <div class="arrow"></div>
+                        <div>
+                            <div class="time">16:20</div>
+                            <div class="airport-name">北京首都T1</div>
+                        </div>
+                    </div>
+                    <div class="flight-meta">
+                        <span>直飞 • 2小时50分钟 • 波音737-800</span>
+                        <span class="price-tag">¥3,680</span>
+                    </div>
+                </div>
+                
+                <div class="flight-card">
+                    <div class="flight-card-header">
+                        <div class="airline">
+                            <div class="airline-logo">东</div>
+                            <div>
+                                <div class="airline-name">东方航空</div>
+                                <div class="flight-number">MU5156</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-info">
+                        <div>
+                            <div class="time">15:15</div>
+                            <div class="airport-name">厦门高崎T4</div>
+                        </div>
+                        <div class="arrow"></div>
+                        <div>
+                            <div class="time">18:05</div>
+                            <div class="airport-name">北京首都T2</div>
+                        </div>
+                    </div>
+                    <div class="flight-meta">
+                        <span>直飞 • 2小时50分钟 • 空客A320</span>
+                        <span class="price-tag">¥3,520</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商务舱服务特色 -->
+            <div class="features">
+                <h4>商务舱服务特色</h4>
+                <div class="feature-list">
+                    <div class="feature-item">优先登机与专属柜台</div>
+                    <div class="feature-item">豪华座椅可180度平躺</div>
+                    <div class="feature-item">精致餐食与饮品服务</div>
+                    <div class="feature-item">专属娱乐系统</div>
+                    <div class="feature-item">额外行李额度50kg</div>
+                    <div class="feature-item">贵宾休息室使用权</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加点击效果和排序功能
+        document.querySelectorAll('.flight-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 可以在这里添加更多交互功能
+                console.log('Flight selected:', this.querySelector('.flight-number').textContent);
+            });
+        });
+        
+        // 价格排序功能
+        function sortByPrice() {
+            const container = document.querySelector('.other-flights');
+            const cards = Array.from(container.querySelectorAll('.flight-card'));
+            
+            cards.sort((a, b) => {
+                const priceA = parseInt(a.querySelector('.price-tag').textContent.replace('¥', '').replace(',', ''));
+                const priceB = parseInt(b.querySelector('.price-tag').textContent.replace('¥', '').replace(',', ''));
+                return priceA - priceB;
+            });
+            
+            cards.forEach(card => container.appendChild(card));
+        }
+        
+        // 页面加载完成后的动画效果
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.flight-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

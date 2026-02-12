@@ -1,0 +1,32 @@
+[
+  {
+    "block_type": 3, 
+    "heading1": { 
+      "elements": [{"text_run": {"content": "击剑规则 API 测试"}}] 
+    }
+  },
+  {
+    "block_type": 4, 
+    "heading2": { 
+      "elements": [{"text_run": {"content": "测试结果"}}] 
+    }
+  },
+  {
+    "block_type": 12, 
+    "bullet": { 
+      "elements": [{"text_run": {"content": "批量写入成功"}}] 
+    }
+  },
+  {
+    "block_type": 12, 
+    "bullet": { 
+      "elements": [{"text_run": {"content": "顺序完全正确"}}] 
+    }
+  },
+  {
+    "block_type": 2, 
+    "text": { 
+      "elements": [{"text_run": {"content": "Hello Feishu Batch Writer! This content was written in ONE atomic request."}}] 
+    }
+  }
+]
