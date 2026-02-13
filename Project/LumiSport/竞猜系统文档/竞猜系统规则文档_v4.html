@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法冰球竞猜系统 - 完整规则文档</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh; color: #fff; line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center; padding: 40px 0;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 20px; margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-tab {
+            padding: 12px 24px; background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2); border-radius: 30px;
+            color: #fff; cursor: pointer; font-size: 14px; font-weight: 600;
+        }
+        .nav-tab:hover, .nav-tab.active { background: #e94560; border-color: #e94560; }
+        .section { display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; }
+        .section.active { display: block; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(233, 69, 96, 0.3); color: #ffd93d; }
+        .highlight-box { background: rgba(233, 69, 96, 0.2); border-left: 4px solid #e94560; padding: 15px 20px; margin: 15px 0; }
+        .flow-box { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        .flow-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; text-align: center; }
+        .arrow { font-size: 2em; color: #e94560; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header><h1>魔法冰球竞猜系统</h1><p>完整规则文档 v4.0</p></header>
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('tier')">段位积分</div>
+            <div class="nav-tab" onclick="showSection('odds')">赔率对照</div>
+            <div class="nav-tab" onclick="showSection('flow')">流程图</div>
+        </div>
+        
+        <div id="tier" class="section active">
+            <h2>段位积分系统</h2>
+            <h3>段位划分（每500分）</h3>
+            <table>
+                <tr><th>段位</th><th>积分区间</th></tr>
+                <tr><td>新手魔法师</td><td>0-499</td></tr>
+                <tr><td>青铜魔法师</td><td>500-999</td></tr>
+                <tr><td>白银魔法师</td><td>1000-1499</td></tr>
+                <tr><td>黄金魔法师</td><td>1500-1999</td></tr>
+                <tr><td>钻石魔法师</td><td>2000-2499</td></tr>
+                <tr><td>铂金魔法师</td><td>2500-2999</td></tr>
+                <tr><td>王者魔法师</td><td>3000+</td></tr>
+            </table>
+            
+            <h3>积分计算规则</h3>
+            <table>
+                <tr><th>段位差距</th><th>获胜得分</th><th>失败扣分</th></tr>
+                <tr><td>对手高3段以上</td><td style="color:#6bcb77">+70分</td><td style="color:#00ff7f">0分</td></tr>
+                <tr><td>对手高2段</td><td style="color:#6bcb77">+60分</td><td style="color:#ff6b6b">-15分</td></tr>
+                <tr><td>对手高1段</td><td style="color:#6bcb77">+55分</td><td style="color:#ff6b6b">-18分</td></tr>
+                <tr><td>同段位</td><td style="color:#6bcb77">+50分</td><td style="color:#ff6b6b">-25分</td></tr>
+                <tr><td>对手低1段</td><td style="color:#6bcb77">+40分</td><td style="color:#ff6b6b">-35分</td></tr>
+                <tr><td>对手低2段</td><td style="color:#6bcb77">+30分</td><td style="color:#ff6b6b">-45分</td></tr>
+                <tr><td>对手低3段以上</td><td style="color:#ffd93d">+10分</td><td style="color:#ff6b6b">-55分</td></tr>
+            </table>
+            
+            <div class="highlight-box">
+                <strong>晋级说明：</strong>同段位每场+50分，500÷50=<strong>10场胜利</strong>即可晋级！
+            </div>
+        </div>
+        
+        <div id="odds" class="section">
+            <h2>赔率对照表</h2>
+            <p>格式：红方赔率:蓝方赔率（弱者赔率更高）</p>
+            <table>
+                <tr><th>红方\蓝方</th><th>新手(2.0)</th><th>青铜(1.8)</th><th>白银(1.6)</th><th>黄金(1.5)</th><th>钻石(1.3)</th><th>铂金(1.2)</th><th>王者(1.1)</th></tr>
+                <tr><th>新手(2.0)</th><td>2.0:2.0</td><td>2.0:1.8</td><td>2.0:1.6</td><td>2.0:1.5</td><td>2.0:1.3</td><td>2.0:1.2</td><td>2.0:1.1</td></tr>
+                <tr><th>青铜(1.8)</th><td>1.8:2.0</td><td>1.8:1.8</td><td>1.8:1.6</td><td>1.8:1.5</td><td>1.8:1.3</td><td>1.8:1.2</td><td>1.8:1.1</td></tr>
+                <tr><th>白银(1.6)</th><td>1.6:2.0</td><td>1.6:1.8</td><td>1.6:1.6</td><td>1.6:1.5</td><td>1.6:1.3</td><td>1.6:1.2</td><td>1.6:1.1</td></tr>
+                <tr><th>黄金(1.5)</th><td>1.5:2.0</td><td>1.5:1.8</td><td>1.5:1.6</td><td>1.5:1.5</td><td>1.5:1.3</td><td>1.5:1.2</td><td>1.5:1.1</td></tr>
+                <tr><th>钻石(1.3)</th><td>1.3:2.0</td><td>1.3:1.8</td><td>1.3:1.6</td><td>1.3:1.5</td><td>1.3:1.3</td><td>1.3:1.2</td><td>1.3:1.1</td></tr>
+                <tr><th>铂金(1.2)</th><td>1.2:2.0</td><td>1.2:1.8</td><td>1.2:1.6</td><td>1.2:1.5</td><td>1.2:1.3</td><td>1.2:1.2</td><td>1.2:1.1</td></tr>
+                <tr><th>王者(1.1)</th><td>1.1:2.0</td><td>1.1:1.8</td><td>1.1:1.6</td><td>1.1:1.5</td><td>1.1:1.3</td><td>1.1:1.2</td><td>1.1:1.1</td></tr>
+            </table>
+        </div>
+        
+        <div id="flow" class="section">
+            <h2>竞猜系统流程</h2>
+            <div class="flow-box">
+                <div class="flow-item">💰<br>获取竞猜币</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🎮<br>参与竞猜</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🎁<br>打赏支持</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🏆<br>结果揭晓</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🛒<br>兑换奖励</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法冰球竞猜系统 - 完整规则文档 v5</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh; color: #fff; line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center; padding: 40px 0;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 20px; margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.2em; opacity: 0.9; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-tab {
+            padding: 12px 24px; background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2); border-radius: 30px;
+            color: #fff; cursor: pointer; transition: all 0.3s ease;
+            font-size: 14px; font-weight: 600;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: #e94560; border-color: #e94560;
+            transform: translateY(-2px); box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+        }
+        .section { display: none; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .section h2 { color: #e94560; font-size: 1.8em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(233, 69, 96, 0.3); }
+        .section h3 { color: #ffd93d; font-size: 1.4em; margin: 25px 0 15px; }
+        .section h4 { color: #6bcb77; font-size: 1.2em; margin: 20px 0 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(233, 69, 96, 0.3); font-weight: 600; color: #ffd93d; }
+        tr:hover { background: rgba(255,255,255,0.05); }
+        .tier-新手 { color: #a8a8a8; }
+        .tier-青铜 { color: #cd7f32; }
+        .tier-白银 { color: #c0c0c0; }
+        .tier-黄金 { color: #ffd700; }
+        .tier-钻石 { color: #00ffff; }
+        .tier-铂金 { color: #e5e4e2; }
+        .tier-王者 { color: #ff6b6b; font-weight: bold; }
+        .element-冰 { color: #00bfff; }
+        .element-火 { color: #ff4500; }
+        .element-风 { color: #00ff7f; }
+        .highlight-box { background: rgba(233, 69, 96, 0.2); border-left: 4px solid #e94560; padding: 15px 20px; margin: 15px 0; border-radius: 0 10px 10px 0; }
+        .formula { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace; margin: 15px 0; border: 1px solid rgba(255,255,255,0.2); }
+        .example-box { background: rgba(107, 203, 119, 0.15); border-left: 4px solid #6bcb77; padding: 15px 20px; margin: 15px 0; border-radius: 0 10px 10px 0; }
+        ul, ol { margin: 15px 0; padding-left: 30px; }
+        li { margin: 8px 0; }
+        .skin-card { display: inline-block; background: rgba(255,255,255,0.1); padding: 15px; margin: 10px; border-radius: 10px; text-align: center; min-width: 120px; }
+        .skin-card .emoji { font-size: 2em; }
+        .flow-box { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        .flow-item { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; text-align: center; }
+        .arrow { font-size: 2em; color: #e94560; }
+        footer { text-align: center; padding: 30px; opacity: 0.7; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏒 魔法冰球竞猜系统</h1>
+            <p>完整规则文档 v5.0 | LumiSports Project</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('overview')">📋 系统概览</div>
+            <div class="nav-tab" onclick="showSection('tier')">🎯 段位积分</div>
+            <div class="nav-tab" onclick="showSection('odds')">💰 赔率对照</div>
+            <div class="nav-tab" onclick="showSection('quiz')">🎮 趣味竞猜</div>
+            <div class="nav-tab" onclick="showSection('reward')">🎁 打赏系统</div>
+            <div class="nav-tab" onclick="showSection('currency')">💎 竞猜币</div>
+            <div class="nav-tab" onclick="showSection('flow')">🔄 流程图</div>
+        </div>
+        
+        <!-- 系统概览 -->
+        <div id="overview" class="section active">
+            <h2>📋 系统概览</h2>
+            
+            <h3>🎮 魔法冰球游戏简介</h3>
+            <p>魔法冰球是一款基于VR的双人对战竞技游戏，玩家通过手势控制护盾的元素属性（冰/火/风），利用元素相克机制进行攻防，将球打进对方球门得分。</p>
+            
+            <h3>📊 竞猜系统架构</h3>
+            <table>
+                <tr><th>模块</th><th>说明</th></tr>
+                <tr><td>基础竞猜</td><td>胜负竞猜 + 段位动态赔率</td></tr>
+                <tr><td>趣味竞猜</td><td>元素之王、精准总分、精准分差</td></tr>
+                <tr><td>打赏系统</td><td>弹幕点赞、功能物品、模型皮肤</td></tr>
+                <tr><td>竞猜币经济</td><td>签到/分享/广告/充值获取，兑换周边和打赏</td></tr>
+            </table>
+            
+            <div class="highlight-box">
+                <strong>🎯 核心玩法：</strong>观众通过小程序参与赛前竞猜，使用竞猜币投注，猜中即可获得奖励。比赛过程中可以通过打赏为选手加油，并获得实时弹幕展示。
+            </div>
+        </div>
+        
+        <!-- 段位积分 -->
+        <div id="tier" class="section">
+            <h2>🎯 段位积分系统</h2>
+            
+            <h3>段位划分（每500分一个段位）</h3>
+            <table>
+                <tr><th>段位</th><th>积分区间</th><th>标识</th></tr>
+                <tr><td class="tier-新手">新手魔法师</td><td>0 - 499</td><td>🌱</td></tr>
+                <tr><td class="tier-青铜">青铜魔法师</td><td>500 - 999</td><td>🥉</td></tr>
+                <tr><td class="tier-白银">白银魔法师</td><td>1000 - 1499</td><td>🥈</td></tr>
+                <tr><td class="tier-黄金">黄金魔法师</td><td>1500 - 1999</td><td>🥇</td></tr>
+                <tr><td class="tier-钻石">钻石魔法师</td><td>2000 - 2499</td><td>💎</td></tr>
+                <tr><td class="tier-铂金">铂金魔法师</td><td>2500 - 2999</td><td>👑</td></tr>
+                <tr><td class="tier-王者">王者魔法师</td><td>3000+</td><td>🏆</td></tr>
+            </table>
+            
+            <h3>积分计算规则</h3>
+            <table>
+                <tr><th>段位差距</th><th>获胜得分</th><th>失败扣分</th></tr>
+                <tr><td>对手高3段以上</td><td style="color:#6bcb77;font-size:1.2em;">+70分</td><td style="color:#00ff7f;font-weight:bold;">0分（不扣分）</td></tr>
+                <tr><td>对手高2段</td><td style="color:#6bcb77;font-size:1.2em;">+60分</td><td style="color:#ff6b6b;">-15分</td></tr>
+                <tr><td>对手高1段</td><td style="color:#6bcb77;font-size:1.2em;">+55分</td><td style="color:#ff6b6b;">-18分</td></tr>
+                <tr><td>同段位</td><td style="color:#6bcb77;font-size:1.2em;">+50分</td><td style="color:#ff6b6b;">-25分</td></tr>
+                <tr><td>对手低1段</td><td style="color:#6bcb77;font-size:1.2em;">+40分</td><td style="color:#ff6b6b;">-35分</td></tr>
+                <tr><td>对手低2段</td><td style="color:#6bcb77;font-size:1.2em;">+30分</td><td style="color:#ff6b6b;">-45分</td></tr>
+                <tr><td>对手低3段以上</td><td style="color:#ffd93d;font-weight:bold;font-size:1.2em;">+10分</td><td style="color:#ff6b6b;">-55分</td></tr>
+            </table>
+            
+            <h3>📊 晋级规则：10场胜利即可晋级</h3>
+            <div class="highlight-box">
+                <strong>🎯 核心设计：</strong>如果玩家累计获得<strong>10场胜利</strong>（同段位），即可晋级到下一个段位！<br><br>
+                每场胜利获得<strong>+50分</strong>，500分 ÷ 50分 = <strong>10场胜利</strong>（不需要连胜，累计即可）
+            </div>
+            
+            <table>
+                <tr><th>当前段位</th><th>目标段位</th><th>所需积分</th><th>所需胜场（同段位）</th></tr>
+                <tr><td class="tier-新手">新手魔法师</td><td class="tier-青铜">青铜魔法师</td><td>500分</td><td>10场</td></tr>
+                <tr><td class="tier-青铜">青铜魔法师</td><td class="tier-白银">白银魔法师</td><td>500分</td><td>10场</td></tr>
+                <tr><td class="tier-白银">白银魔法师</td><td class="tier-黄金">黄金魔法师</td><td>500分</td><td>10场</td></tr>
+                <tr><td class="tier-黄金">黄金魔法师</td><td class="tier-钻石">钻石魔法师</td><td>500分</td><td>10场</td></tr>
+                <tr><td class="tier-钻石">钻石魔法师</td><td class="tier-铂金">铂金魔法师</td><td>500分</td><td>10场</td></tr>
+                <tr><td class="tier-铂金">铂金魔法师</td><td class="tier-王者">王者魔法师</td><td>500分</td><td>10场</td></tr>
+            </table>
+            
+            <div class="example-box">
+                <strong>💡 示例说明：</strong><br>
+                小明是<strong>新手魔法师</strong>（0分），挑战同段位对手：<br>
+                → 第1场胜利：+50分（总分50）<br>
+                → 第5场胜利：+50分（总分250）<br>
+                → 第10场胜利：+50分（总分500）→ <strong>晋级青铜魔法师！</strong><br><br>
+                <em>注意：中间可以有失败，累计10场胜利即可，不需要连胜。</em>
+            </div>
+            
+            <h3>🏆 王者魔法师</h3>
+            <div class="highlight-box">
+                <strong>当积分达到3000分（王者魔法师）后：</strong><br><br>
+                • 不再显示段位名称，改为显示<strong>全国排名</strong><br>
+                • 排名根据积分高低实时更新<br>
+                • 显示格式：王者魔法师 · 全国第127名<br>
+                • 积分无上限，可继续累积提升排名
+            </div>
+        </div>
+        
+        <!-- 赔率对照 -->
+        <div id="odds" class="section">
+            <h2>💰 赔率对照表</h2>
+            
+            <h3>基础胜负竞猜</h3>
+            <div class="formula">
+                <strong>赔率格式：红方赔率:蓝方赔率</strong><br><br>
+                段位修正系数：<br>
+                • 押高段位胜（vs低段位）：×0.6<br>
+                • 同段位对决：×1.0<br>
+                • 押低段位胜（vs高段位）：×1.8
+            </div>
+            
+            <h3>完整赔率矩阵表</h3>
+            <p>格式：<strong>红方赔率:蓝方赔率</strong></p>
+            <p><small>同段位：段位越高，赔率越高（高手对决更精彩）<br>跨段位：弱者赔率高，强者赔率低风险小</small></p>
+            <table>
+                <tr><th>红方\蓝方</th><th>新手</th><th>青铜</th><th>白银</th><th>黄金</th><th>钻石</th><th>铂金</th><th>王者</th></tr>
+                <tr><th>新手(1.5)</th><td class="highlight">1.5:1.5</td><td>2.0:1.8</td><td>2.0:1.6</td><td>2.0:1.5</td><td>2.0:1.3</td><td>2.0:1.2</td><td>2.0:1.1</td></tr>
+                <tr><th>青铜(1.5)</th><td>1.8:2.0</td><td class="highlight">1.5:1.5</td><td>1.8:1.6</td><td>1.8:1.5</td><td>1.8:1.3</td><td>1.8:1.2</td><td>1.8:1.1</td></tr>
+                <tr><th>白银(1.5)</th><td>1.6:2.0</td><td>1.6:1.8</td><td class="highlight">1.5:1.5</td><td>1.6:1.5</td><td>1.6:1.3</td><td>1.6:1.2</td><td>1.6:1.1</td></tr>
+                <tr><th>黄金(1.6)</th><td>1.5:2.0</td><td>1.5:1.8</td><td>1.5:1.6</td><td class="highlight">1.6:1.6</td><td>1.5:1.3</td><td>1.5:1.2</td><td>1.5:1.1</td></tr>
+                <tr><th>钻石(1.6)</th><td>1.3:2.0</td><td>1.3:1.8</td><td>1.3:1.6</td><td>1.3:1.5</td><td class="highlight">1.6:1.6</td><td>1.3:1.2</td><td>1.3:1.1</td></tr>
+                <tr><th>铂金(1.7)</th><td>1.2:2.0</td><td>1.2:1.8</td><td>1.2:1.6</td><td>1.2:1.5</td><td>1.2:1.3</td><td class="highlight">1.7:1.7</td><td>1.2:1.1</td></tr>
+                <tr><th>王者(1.8)</th><td>1.1:2.0</td><td>1.1:1.8</td><td>1.1:1.6</td><td>1.1:1.5</td><td>1.1:1.3</td><td>1.1:1.2</td><td class="highlight">1.8:1.8</td></tr>
+            </table>
+            
+            <div class="highlight-box">
+                <strong>🎯 同段位赔率规则：</strong>段位越高，同段对决赔率越高！<br>
+                • 新手/青铜/白银同段：<strong>1.5:1.5</strong><br>
+                • 黄金/钻石同段：<strong>1.6:1.6</strong><br>
+                • 铂金同段：<strong>1.7:1.7</strong><br>
+                • 王者同段：<strong>1.8:1.8</strong>（高手对决最刺激！）<br><br>
+                <strong>跨段位规则：</strong>弱者赔率高（新手2.0），强者赔率低（王者1.1）
+            </div>
+        </div>
+        
+        <!-- 趣味竞猜 -->
+        <div id="quiz" class="section">
+            <h2>🎮 趣味竞猜玩法</h2>
+            
+            <h3>1️⃣ 元素之王</h3>
+            <p><strong>问题：</strong>本局全场出现次数最多的元素球是哪一种？</p>
+            <table>
+                <tr><th>选项</th><th>赔率</th><th>说明</th></tr>
+                <tr><td class="element-冰">❄️ 冰球</td><td>1:3</td><td>冰元素出现最多</td></tr>
+                <tr><td class="element-火">🔥 火球</td><td>1:3</td><td>火元素出现最多</td></tr>
+                <tr><td class="element-风">🌪️ 风球</td><td>1:3</td><td>风元素出现最多</td></tr>
+                <tr><td>🧊🔥 冰球&火球（相同）</td><td>1:6</td><td>冰火出现次数相同且最多</td></tr>
+                <tr><td>🧊🌪️ 冰球&风球（相同）</td><td>1:6</td><td>冰风出现次数相同且最多</td></tr>
+                <tr><td>🔥🌪️ 火球&风球（相同）</td><td>1:6</td><td>火风出现次数相同且最多</td></tr>
+                <tr><td>⚖️ 均衡（三种元素球次数相同）</td><td class="highlight">1:8</td><td>三种元素出现次数完全相同</td></tr>
+            </table>
+            
+            <h4>📊 赔率计算说明</h4>
+            <div class="formula">
+                <strong>赔率设计原理（基于概率）：</strong><br><br>
+                • <strong>单一元素（1:3）：</strong>3种可能，理论概率约33%，赔率设为1:3提供合理回报<br><br>
+                • <strong>双元素并列（1:6）：</strong>3种组合，理论概率约16.7%，赔率提升至1:6<br><br>
+                • <strong>三者均衡（1:8）：</strong>仅1种可能，理论概率极低（约5%以下），高赔率1:8补偿风险
+            </div>
+            
+            <h3>2️⃣ 精准总分 ⭐高难度</h3>
+            <p><strong>问题：</strong>本局双方总得分会是多少分？</p>
+            <div class="highlight-box">
+                <strong>玩法说明：</strong><br>
+                • 玩家手动输入数字（如：输入 "12"）<br>
+                • <strong>必须完全一致才算中奖</strong><br>
+                • 赔率：<strong>1:20</strong>（高难度高回报）
+            </div>
+            <p><strong>示例：</strong>玩家猜12分，实际红队7分+蓝队5分=12分 → ✅ 中奖！</p>
+            
+            <h3>3️⃣ 精准分差 ⭐高难度</h3>
+            <p><strong>问题：</strong>本局双方得分相差多少分？</p>
+            <div class="highlight-box">
+                <strong>玩法说明：</strong><br>
+                • 玩家手动输入数字（如：输入 "3"）<br>
+                • <strong>必须完全一致才算中奖</strong>（不区分谁高谁低）<br>
+                • 赔率：<strong>1:15</strong>
+            </div>
+            <p><strong>示例：</strong>玩家猜相差3分，实际红队8分-蓝队5分=3分 → ✅ 中奖！</p>
+        </div>
+        
+        <!-- 打赏系统 -->
+        <div id="reward" class="section">
+            <h2>🎁 打赏系统</h2>
+            
+            <h3>1️⃣ 点赞 + 实时弹幕</h3>
+            <div class="highlight-box">
+                <strong>免费点赞：</strong>点击 ❤️ 按钮为选手加油<br>
+                <strong>弹幕留言：</strong>点赞时可输入一句话（最多20字）<br>
+                <strong>实时投屏：</strong>弹幕同步显示在大屏幕上
+            </div>
+            
+            <h4>弹幕样式</h4>
+            <table>
+                <tr><th>用户类型</th><th>弹幕颜色</th><th>样式</th></tr>
+                <tr><td>普通用户</td><td>白色</td><td>❤️ 小王：红队加油！</td></tr>
+                <tr><td>VIP用户</td><td>金色</td><td>❤️ VIP：冰系必胜！</td></tr>
+                <tr><td>大额打赏</td><td>红色+特效</td><td>🔥 大佬：炸裂吧！</td></tr>
+            </table>
+            
+            <h3>2️⃣ 功能物品打赏</h3>
+            <table>
+                <tr><th>物品</th><th>价格</th><th>效果</th><th>使用时机</th></tr>
+                <tr><td>🎉 彩带礼炮</td><td>100币</td><td>选手出场彩带动画</td><td>赛前</td></tr>
+                <tr><td>⚡ 能量饮料</td><td>200币</td><td>护盾发光特效（5秒）</td><td>赛中</td></tr>
+                <tr><td>🔥 火焰助威</td><td>300币</td><td>火焰特效（10秒）</td><td>赛中</td></tr>
+                <tr><td>❄️ 冰霜守护</td><td>300币</td><td>冰霜特效（10秒）</td><td>赛中</td></tr>
+                <tr><td>🌟 全场聚光灯</td><td>500币</td><td>全场暗下，只照亮选手（5秒）</td><td>赛中</td></tr>
+                <tr><td>👤 模型皮肤</td><td>800币</td><td>改变选手模型外观（24小时）</td><td>赛前</td></tr>
+            </table>
+            
+            <h3>3️⃣ 模型皮肤系统</h3>
+            <p><strong>皮肤有效期：</strong>24小时（从首次装备开始计算）</p>
+            <p><strong>使用规则：</strong></p>
+            <ul>
+                <li>可同时拥有多个皮肤，但同一时间只能装备1个</li>
+                <li>切换皮肤费用：<strong>100竞猜币/次</strong></li>
+                <li>有效期内所有比赛可用，不局限于单局</li>
+            </ul>
+            
+            <h4>皮肤类型</h4>
+            <div class="skin-card"><div class="emoji">🤖</div><div>机甲战士</div><small>银色科技风</small></div>
+            <div class="skin-card"><div class="emoji">😈</div><div>火焰恶魔</div><small>红色烈焰</small></div>
+            <div class="skin-card"><div class="emoji">🧙</div><div>冰霜骑士</div><small>蓝色冰晶</small></div>
+            <div class="skin-card"><div class="emoji">🧚</div><div>风之精灵</div><small>绿色轻盈</small></div>
+            <div class="skin-card"><div class="emoji">👑</div><div>黄金圣斗士</div><small>金色闪耀</small></div>
+        </div>
+        
+        <!-- 竞猜币 -->
+        <div id="currency" class="section">
+            <h2>💎 竞猜币系统</h2>
+            
+            <h3>获取途径</h3>
+            <table>
+                <tr><th>方式</th><th>获得数量</th><th>每日限制</th></tr>
+                <tr><td>📅 每日签到</td><td>100币</td><td>1次/日（连续7天额外+500）</td></tr>
+                <tr><td>📤 分享好友</td><td>50币</td><td>3次/日</td></tr>
+                <tr><td>📺 观看广告</td><td>30币</td><td>5次/日（每次30秒）</td></tr>
+                <tr><td>💳 充值购买</td><td>100币 = 1元</td><td>无上限</td></tr>
+            </table>
+            
+            <h3>兑换奖励</h3>
+            <h4>周边奖励</h4>
+            <table>
+                <tr><th>奖品</th><th>所需竞猜币</th></tr>
+                <tr><td>主题贴纸</td><td>500币</td></tr>
+                <tr><td>签名明信片</td><td>1500币</td></tr>
+                <tr><td>定制钥匙扣</td><td>2000币</td></tr>
+                <tr><td>主题T恤</td><td>5000币</td></tr>
+                <tr><td>线下观赛门票</td><td>8000币</td></tr>
+                <tr><td>联名VR手柄</td><td>20000币</td></tr>
+            </table>
+            
+            <h4>打赏功能物品</h4>
+            <p>可兑换所有打赏物品（彩带礼炮、能量饮料、火焰助威、冰霜守护、全场聚光灯、模型皮肤）</p>
+            
+            <div class="highlight-box">
+                <strong>💡 经济循环：</strong><br>
+                获取竞猜币 → 参与竞猜/兑换打赏物品 → 支持选手 → 选手表现更好 → 观众更积极参与 → 生态良性循环
+            </div>
+        </div>
+        
+        <!-- 流程图 -->
+        <div id="flow" class="section">
+            <h2>🔄 竞猜系统完整流程</h2>
+            
+            <div class="flow-box">
+                <div class="flow-item">💰<br>获取竞猜币</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🎮<br>参与竞猜</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🎁<br>打赏支持</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🏆<br>结果揭晓</div>
+                <div class="arrow">→</div>
+                <div class="flow-item">🛒<br>兑换奖励</div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>🎯 循环机制：</strong>整个流程形成闭环，观众可以通过自己的技巧（猜中竞猜）获得奖励，也可以通过活跃（签到/分享）积累竞猜币，最终支持自己喜欢的选手，形成良性生态。
+            </div>
+        </div>
+        
+        <footer>
+            <p>🏒 魔法冰球竞猜系统 | LumiSports Project</p>
+            <p>版本 5.0 | 2026年2月</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
