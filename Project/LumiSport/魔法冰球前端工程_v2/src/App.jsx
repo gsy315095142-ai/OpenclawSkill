@@ -29,7 +29,7 @@ function App() {
     <div className="container">
       <header>
         <h1>🏒 魔法冰球竞猜系统</h1>
-        <p>完整规则文档 v5.0 | LumiSports Project</p>
+        <p>规则说明 2025-02-13 | LumiSports Project</p>
       </header>
       
       <div className="nav-tabs">

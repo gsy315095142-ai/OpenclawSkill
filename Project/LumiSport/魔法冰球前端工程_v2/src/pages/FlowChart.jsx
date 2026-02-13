@@ -61,131 +61,96 @@ function FlowChart() {
   return (
     <div className="section-content">
       <h2>🔄 竞猜系统完整流程</h2>
-      <p className="flow-intro">点击左侧流程节点查看详细说明</p>
       
-      {/* 竖向流程图 + 卡片并排布局 */}
-      <div className="vertical-flow-container">
-        {/* 左侧：流程节点 */}
-        <div className="flow-steps-column">
+      {/* 横向时间轴 */}
+      <div className="horizontal-timeline">
+        <div className="timeline-track">
           {flowDetails.map((item, i) => (
-            <div 
-              key={i} 
-              className={`vertical-step ${activeStep === item.step ? 'active' : ''}`}
-              onClick={() => setActiveStep(item.step)}
-            >
-              <div className="step-connector">
-                <div className="step-dot" style={{ background: item.color }}>
-                  <span className="step-num">{item.step}</span>
+            <div key={i} className="timeline-node-wrapper">
+              <div 
+                className={`timeline-node ${activeStep === item.step ? 'active' : ''}`}
+                onClick={() => setActiveStep(item.step)}
+                style={{ '--node-color': item.color }}
+              >
+                <div className="node-circle">
+                  <span className="node-icon">{item.icon}</span>
                 </div>
-                {i < flowDetails.length - 1 && <div className="step-line"></div>}
+                <div className="node-label">{item.title}</div>
+                <div className="node-step">步骤 {item.step}</div>
               </div>
-              <div className="step-content">
-                <div className="step-icon-large">{item.icon}</div>
-                <div className="step-info">
-                  <div className="step-title-vertical">{item.title}</div>
-                  <div className="step-subtitle">{item.subtitle}</div>
+              {i < flowDetails.length - 1 && (
+                <div className="timeline-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M13 5l7 7-7 7"/>
+                  </svg>
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
-
-        {/* 右侧：详细卡片 */}
-        <div className="flow-card-column">
-          <div 
-            className="detail-card"
-            style={{ '--card-color': activeItem.color }}
-          >
-            <div className="detail-header">
-              <span className="detail-step-badge" style={{ background: activeItem.color }}>
-                步骤 {activeItem.step}
-              </span>
-              <span className="detail-icon">{activeItem.icon}</span>
+      </div>
+      
+      {/* 详细卡片 */}
+      <div className="flow-detail-card" style={{ '--card-color': activeItem.color }}>
+        <div className="flow-detail-header">
+          <div className="flow-detail-left">
+            <span className="flow-detail-icon">{activeItem.icon}</span>
+            <div className="flow-detail-title-group">
+              <h3>{activeItem.title}</h3>
+              <span className="flow-detail-subtitle">{activeItem.subtitle}</span>
             </div>
-            
-            <h3 className="detail-title">{activeItem.title}</h3>
-            <span className="detail-subtitle">{activeItem.subtitle}</span>
-            
-            <p className="detail-desc">{activeItem.desc}</p>
-            
-            <div className="detail-section">
-              <h4>📋 操作方式</h4>
-              <div className="detail-methods">
-                {activeItem.methods.map((m, j) => (
-                  <span key={j} className="detail-method-tag">{m}</span>
-                ))}
-              </div>
-            </div>
-            
-            <div className="detail-tip" style={{ borderLeftColor: activeItem.color }}>
-              <span className="tip-icon-large">💡</span>
-              <div className="tip-content">
-                <strong>小贴士</strong>
-                <p>{activeItem.tip}</p>
-              </div>
-            </div>
+          </div>
+          <span className="flow-detail-badge" style={{ background: activeItem.color }}>
+            步骤 {activeItem.step}
+          </span>
+        </div>
+        
+        <p className="flow-detail-desc">{activeItem.desc}</p>
+        
+        <div className="flow-detail-methods">
+          <h4>📋 操作方式</h4>
+          <div className="methods-grid">
+            {activeItem.methods.map((m, j) => (
+              <div key={j} className="method-item">{m}</div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="flow-detail-tip">
+          <span className="tip-icon">💡</span>
+          <div className="tip-text">
+            <strong>小贴士</strong>
+            <p>{activeItem.tip}</p>
           </div>
         </div>
       </div>
-
-      {/* 循环机制说明 */}
-      <div className="cycle-section">
-        <h3>🔄 循环生态机制</h3>
-        <div className="cycle-diagram">
-          <div className="cycle-center">
-            <div className="cycle-icon">♻️</div>
-            <div className="cycle-text">良性循环</div>
-          </div>
-          <div className="cycle-arrows">
-            <div className="cycle-arrow arrow-1">
-              <span>获取竞猜币</span>
-              <div className="arrow-line"></div>
-            </div>
-            <div className="cycle-arrow arrow-2">
-              <span>参与竞猜</span>
-              <div className="arrow-line"></div>
-            </div>
-            <div className="cycle-arrow arrow-3">
-              <span>打赏支持</span>
-              <div className="arrow-line"></div>
-            </div>
-            <div className="cycle-arrow arrow-4">
-              <span>获得回报</span>
-              <div className="arrow-line"></div>
-            </div>
-          </div>
+      
+      {/* 流程导航 */}
+      <div className="flow-navigation">
+        <button 
+          className="flow-nav-btn prev"
+          disabled={activeStep === 1}
+          onClick={() => setActiveStep(activeStep - 1)}
+        >
+          ← 上一步
+        </button>
+        <div className="flow-dots">
+          {flowDetails.map((item, i) => (
+            <span 
+              key={i}
+              className={`flow-dot ${activeStep === item.step ? 'active' : ''}`}
+              style={{ background: activeStep === item.step ? item.color : 'rgba(255,255,255,0.2)' }}
+              onClick={() => setActiveStep(item.step)}
+            />
+          ))}
         </div>
-        <div className="cycle-desc">
-          <p><strong>生态价值：</strong>观众通过技巧（猜中竞猜）或活跃（签到/分享）积累竞猜币，</p>
-          <p>支持喜爱的选手 → 选手表现更好 → 比赛更精彩 → 观众更积极参与 → <strong>形成良性生态循环</strong></p>
-        </div>
-      </div>
-
-      {/* 关键数据一览 */}
-      <div className="stats-section">
-        <h3>📊 关键数据一览</h3>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-number">7</div>
-            <div className="stat-label">段位等级</div>
-            <div className="stat-desc">从新手到王者</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-number">3</div>
-            <div className="stat-label">竞猜类型</div>
-            <div className="stat-desc">基础+趣味玩法</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-number">6</div>
-            <div className="stat-label">打赏物品</div>
-            <div className="stat-desc">彩带到皮肤</div>
-          </div>
-          <div className="stat-card highlight">
-            <div className="stat-number">20x</div>
-            <div className="stat-label">最高赔率</div>
-            <div className="stat-desc">精准总分猜中</div>
-          </div>
-        </div>
+        <button 
+          className="flow-nav-btn next"
+          disabled={activeStep === 5}
+          onClick={() => setActiveStep(activeStep + 1)}
+        >
+          下一步 →
+        </button>
       </div>
     </div>
   );

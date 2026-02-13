@@ -9,16 +9,20 @@ function OddsTable() {
       
       <h3>基础胜负竞猜</h3>
       <div className="formula">
-        <strong>赔率格式：红方赔率:蓝方赔率</strong><br/><br/>
-        段位修正系数：<br/>
-        • 押高段位胜（vs低段位）：×0.6<br/>
-        • 同段位对决：×1.0<br/>
-        • 押低段位胜（vs高段位）：×1.8
+        <strong>赔率说明：</strong>表格显示的是<strong>纵向段位</strong>在对战<strong>横向段位</strong>时的赔率<br/><br/>
+        例如：新手(纵) vs 王者(横) = 投注新手获胜的赔率为<strong>2.7倍</strong><br/>
+        段位差距越大，弱者赔率越高（最高<strong>2.7倍</strong>），最低赔率<strong>1.2倍</strong>
       </div>
       
       <h3>完整赔率矩阵</h3>
-      <p>格式：<strong>红方赔率:蓝方赔率</strong></p>
-      <p className="hint">同段位：段位越高，赔率越高（高手对决更精彩）<br/>跨段位：弱者赔率高，强者赔率低风险小</p>
+      <div className="highlight-box">
+        <strong>🎯 数值设计目标：</strong><br/>
+        • 横向和纵向都是<strong>等差数列</strong>（横向公差+0.20，纵向公差-0.05）<br/>
+        • 弱者打强者，弱者赔率高<br/>
+        • 强者对决赔率更高（吸引下注）<br/>
+        • 所有赔率尾数为5或0
+      </div>
+      <p className="hint">每个格子显示<strong>纵向列</strong>在对战<strong>横向列</strong>时的赔率<br/>示例：红方(纵)新手 vs 蓝方(横)王者 = 投注红方获胜赔率为<strong>2.7倍</strong></p>
       
       <table className="data-table odds-matrix">
         <thead>
@@ -30,7 +34,7 @@ function OddsTable() {
         <tbody>
           {oddsData.matrix.map((row, i) => (
             <tr key={i}>
-              <th>{tiers[i]}({oddsData.tiers[i].match(/\d+\.\d+/)[0]})</th>
+              <th>{tiers[i]}</th>
               {row.map((cell, j) => (
                 <td key={j} className={i === j ? 'highlight' : ''}>{cell}</td>
               ))}
@@ -41,11 +45,16 @@ function OddsTable() {
       
       <div className="highlight-box">
         <strong>🎯 同段位赔率规则：</strong>段位越高，同段对决赔率越高！<br/>
-        • 新手/青铜/白银同段：<strong>1.5:1.5</strong><br/>
-        • 黄金/钻石同段：<strong>1.6:1.6</strong><br/>
-        • 铂金同段：<strong>1.7:1.7</strong><br/>
-        • 王者同段：<strong>1.8:1.8</strong>（高手对决最刺激！）<br/><br/>
-        <strong>跨段位规则：</strong>弱者赔率高（新手2.0），强者赔率低（王者1.1）
+        • 新手同段：<strong>1.50倍</strong><br/>
+        • 青铜同段：<strong>1.65倍</strong><br/>
+        • 白银同段：<strong>1.80倍</strong><br/>
+        • 黄金同段：<strong>1.95倍</strong><br/>
+        • 钻石同段：<strong>2.10倍</strong><br/>
+        • 铂金同段：<strong>2.25倍</strong><br/>
+        • 王者同段：<strong>2.40倍</strong>（高手对决最刺激！）<br/><br/>
+        <strong>跨段位规则：</strong>段位差距越大，赔率差距越大<br/>
+        • 弱者赔率最高 <strong>2.70倍</strong>（如新手vs王者）<br/>
+        • 最低赔率 <strong>1.20倍</strong>（王者对战新手）
       </div>
     </div>
   );
