@@ -106,6 +106,15 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.
 
+### 🎯 Skill 优先规则（重要）
+
+**触发 Skill 时必须先读取 `SKILL.md`：**
+- 当用户指令匹配 `MEMORY.md` 中的 Magic Word 时，**必须先读取对应的 Skill 文件**
+- 当系统 `<available_skills>` 中有匹配的 skill 描述时，**必须先读取该 skill 的 `SKILL.md`**
+- 读取后再执行，不可跳过
+
+**原因：** Skill 文件包含详细的执行规范、来源列表、模板格式等关键信息，跳过会导致输出质量下降。
+
 ### 🛠️ Local Skills
 
 Custom skills stored in this workspace:
