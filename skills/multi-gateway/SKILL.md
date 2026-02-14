@@ -142,7 +142,7 @@ Schema 只接受：`"auto" | "lan" | "loopback" | "custom" | "tailnet"`
 
 | 项目 | 值 |
 |------|-----|
-| 路径 | `\\192.168.1.39\Share\光速产研中心` |
+| 路径 | `\\192.168.1.39\Share\光速产研中心\AI\Openclaw\Openclaw-Shared` |
 | 账号 | `LumiEra` |
 | 密码 | `Lumi123` |
 
@@ -155,17 +155,17 @@ Schema 只接受：`"auto" | "lan" | "loopback" | "custom" | "tailnet"`
 net use "\\192.168.1.39\Share\光速产研中心" /user:LumiEra Lumi123
 
 # 列出目录
-Get-ChildItem "\\192.168.1.39\Share\光速产研中心"
+Get-ChildItem "\\192.168.1.39\Share\光速产研中心\AI\Openclaw\Openclaw-Shared"
 ```
 
 ### 7.4 跨实例通信协议
 
 在共享文件夹中创建消息文件，实现两个 OpenClaw 之间的异步通信：
 
-**建议的文件结构：**
+**文件结构：**
 
 ```
-\\192.168.1.39\Share\光速产研中心\OpenClaw-Shared\
+\\192.168.1.39\Share\光速产研中心\AI\Openclaw\Openclaw-Shared\
 ├── messages\
 │   ├── to-instance-A.jsonl    # 发给实例A的消息
 │   └── to-instance-B.jsonl    # 发给实例B的消息

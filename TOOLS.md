@@ -45,7 +45,7 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 | 项目 | 值 |
 |------|-----|
-| 路径 | `\\192.168.1.39\Share\光速产研中心` |
+| 路径 | `\\192.168.1.39\Share\光速产研中心\AI\Openclaw\Openclaw-Shared` |
 | 账号 | `LumiEra` |
 | 密码 | `Lumi123` |
 
