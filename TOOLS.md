@@ -33,4 +33,14 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+### 远程 OpenClaw 节点
+
+| 名称 | IP | 端口 | Token |
+|------|-----|------|-------|
+| AI电脑 | 192.168.1.52 | 18789 | f74bba24876b82e3a1793ad4e19214c4bae91b2a030303cf |
+
+**使用方式：** 详见 `skills/multi-gateway/SKILL.md`
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.

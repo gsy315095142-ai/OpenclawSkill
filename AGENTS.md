@@ -11,7 +11,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 Before doing anything else:
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+3. Read `memory/shared/YYYY-MM-DD.md` (today + yesterday) for recent context
 4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
@@ -19,8 +19,19 @@ Don't ask permission. Just do it.
 ## Memory
 
 You wake up fresh each session. These files are your continuity:
-- **Daily notes:** `memory/YYYY-MM-DD.md` (create `memory/` if needed) — raw logs of what happened
+- **Shared daily notes:** `memory/shared/YYYY-MM-DD.md` — raw logs of what happened (not session-specific)
+- **Session-specific notes:** `memory/{dm|group}/{chat_id}/YYYY-MM-DD.md` — private/group chat logs
 - **Long-term:** `MEMORY.md` — your curated memories, like a human's long-term memory
+
+### 📁 Directory Structure
+```
+memory/
+├── dm/{chat_id}/        # 私聊记录（按会话隔离）
+├── group/{chat_id}/     # 群聊记录（按会话隔离）
+├── shared/              # 共享记忆（工作日志、待办等）
+└── README.md            # 目录说明
+```
+**Why separate?** Avoid conflicts when multiple sessions write to memory simultaneously.
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
@@ -122,6 +133,8 @@ Custom skills stored in this workspace:
 | Skill | Location | When to Use |
 |-------|----------|-------------|
 | feishu-doc-best-practices | `skills/feishu-doc-best-practices/SKILL.md` | 编辑飞书云文档时，确保正确使用append/update_block操作 |
+| group-chat-etiquette | `skills/group-chat-etiquette/SKILL.md` | 群聊环境下的行为准则和敏感操作处理 |
+| memory-management | `skills/memory-management/SKILL.md` | Memory 目录结构管理规范和最佳实践 |
 
 **Usage**: When working with Feishu docs, read `skills/feishu-doc-best-practices/SKILL.md` first to avoid common pitfalls.
 
@@ -196,7 +209,7 @@ You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it
 
 ### 🔄 Memory Maintenance (During Heartbeats)
 Periodically (every few days), use a heartbeat to:
-1. Read through recent `memory/YYYY-MM-DD.md` files
+1. Read through recent `memory/shared/YYYY-MM-DD.md` files
 2. Identify significant events, lessons, or insights worth keeping long-term
 3. Update `MEMORY.md` with distilled learnings
 4. Remove outdated info from MEMORY.md that's no longer relevant
