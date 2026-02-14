@@ -41,6 +41,21 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 **使用方式：** 详见 `skills/multi-gateway/SKILL.md`
 
+### 跨实例共享存储
+
+| 项目 | 值 |
+|------|-----|
+| 路径 | `\\192.168.1.39\Share\光速产研中心` |
+| 账号 | `LumiEra` |
+| 密码 | `Lumi123` |
+
+**用途：** 多个 OpenClaw 实例之间的消息传递和文件共享
+
+**访问命令：**
+```powershell
+net use "\\192.168.1.39\Share\光速产研中心" /user:LumiEra Lumi123
+```
+
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
