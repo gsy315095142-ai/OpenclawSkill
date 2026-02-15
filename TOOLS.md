@@ -35,9 +35,11 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ### 远程 OpenClaw 节点
 
-| 名称 | IP | 端口 | Token |
-|------|-----|------|-------|
-| AI电脑 | 192.168.1.52 | 18789 | f74bba24876b82e3a1793ad4e19214c4bae91b2a030303cf |
+配置存储在 `memory/secrets.json`（已加入 .gitignore，不提交到 Git）
+
+| 名称 | IP | 端口 |
+|------|-----|------|
+| AI电脑 | 192.168.1.52 | 18789 |
 
 **使用方式：** 详见 `skills/multi-gateway/SKILL.md`
 
@@ -46,14 +48,13 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 | 项目 | 值 |
 |------|-----|
 | 路径 | `\\192.168.1.39\Share\光速产研中心\AI\Openclaw\Openclaw-Shared` |
-| 账号 | `LumiEra` |
-| 密码 | `Lumi123` |
 
 **用途：** 多个 OpenClaw 实例之间的消息传递和文件共享
 
 **访问命令：**
 ```powershell
-net use "\\192.168.1.39\Share\光速产研中心" /user:LumiEra Lumi123
+# 凭证存储在 memory/secrets.json
+net use "\\192.168.1.39\Share\光速产研中心" /user:<username> <password>
 ```
 
 ---

@@ -11,8 +11,10 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 Before doing anything else:
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/shared/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+3. Read `skills/execution-standards/SKILL.md` — ⭐ **执行任务规范（必读）**
+4. Read `skills/web-search/SKILL.md` — ⭐ **联网搜索规范（必读）**
+5. Read `memory/shared/YYYY-MM-DD.md` (today + yesterday) for recent context
+6. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
@@ -132,6 +134,9 @@ Custom skills stored in this workspace:
 
 | Skill | Location | When to Use |
 |-------|----------|-------------|
+| execution-standards | `skills/execution-standards/SKILL.md` | **每次启动必读** - 任务执行规范 |
+| web-search | `skills/web-search/SKILL.md` | **每次启动必读** - 联网搜索规范（替代缺失的 API） |
+| multi-model-async | `skills/multi-model-async/SKILL.md` | **异步多模型任务** - 用不同AI模型执行特定任务 |
 | feishu-doc-best-practices | `skills/feishu-doc-best-practices/SKILL.md` | 编辑飞书云文档时，确保正确使用append/update_block操作 |
 | group-chat-etiquette | `skills/group-chat-etiquette/SKILL.md` | 群聊环境下的行为准则和敏感操作处理 |
 | memory-management | `skills/memory-management/SKILL.md` | Memory 目录结构管理规范和最佳实践 |

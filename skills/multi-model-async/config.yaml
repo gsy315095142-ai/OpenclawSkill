@@ -1,0 +1,71 @@
+# 多模型异步任务 - 默认配置
+# Default Task Types and Model Mapping
+
+task_defaults:
+  # 任务类型检测关键词 → 默认模型
+  mapping:
+    # 分析类任务 → Gemini 3 Pro (推理+长上下文)
+    analyze:
+      keywords: ["分析", "解析", "深度", "研究", "评估", "审查", "analyze", "analysis", "review", "evaluate"]
+      default_model: "openrouter/google/gemini-3-pro-preview"
+      description: "深度分析、推理、文档审查"
+      estimated_time: "3-5分钟"
+    
+    # 代码类任务 → GLM-5 (代码能力强)
+    code:
+      keywords: ["代码", "编程", "写程序", "实现", "开发", "函数", "类", "code", "programming", "implement", "function", "class"]
+      default_model: "zai/glm-5"
+      description: "代码生成、编程实现"
+      estimated_time: "2-3分钟"
+    
+    # 图片生成 → 多优先级方案
+    image:
+      keywords: ["图片", "画图", "生成图", "UI", "设计图", "image", "picture", "generate image", "UI design", "draw"]
+      priority:
+        - name: "Hugging Face FLUX.1"
+          model: "hf-flux-schnell"
+          method: "local_api"
+          description: "优先使用，已验证可用"
+        - name: "Gemini 3 Pro Image"
+          model: "openrouter/google/gemini-3-pro-image-preview"
+          method: "openrouter"
+          description: "备选方案1"
+        - name: "GPT-5 Image"
+          model: "openrouter/openai/gpt-5-image"
+          method: "openrouter"
+          description: "备选方案2"
+      default_model: "hf-flux-schnell"
+      description: "图片生成、UI设计（优先HF，备选Gemini/GPT-5）"
+      estimated_time: "1-2分钟"
+    
+    # 长文档处理 → Gemini 3 Pro (上下文长)
+    document:
+      keywords: ["文档", "总结", "摘要", "长文", "报告", "document", "summary", "summarize", "long text", "report"]
+      default_model: "openrouter/google/gemini-3-pro-preview"
+      description: "长文档处理、总结"
+      estimated_time: "2-4分钟"
+    
+    # 搜索查询 → Riverflow (快速+经济)
+    search:
+      keywords: ["搜索", "查找", "查询", "最新", "新闻", "search", "find", "look up", "latest", "news"]
+      default_model: "openrouter/sourceful/riverflow-v2-pro"
+      description: "信息搜索、事实查询"
+      estimated_time: "2-3分钟"
+  
+  # 默认兜底模型
+  fallback_model: "moonshot/kimi-k2.5"
+  
+  # 任务超时设置 (秒)
+  timeouts:
+    analyze: 300
+    code: 180
+    image: 120
+    document: 240
+    search: 180
+    default: 300
+  
+  # 任务优先级
+  priorities:
+    high: ["code", "image"]
+    normal: ["analyze", "search"]
+    low: ["document"]

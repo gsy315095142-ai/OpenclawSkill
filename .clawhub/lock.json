@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1771073772972
+    },
+    "feishu-card": {
+      "version": "1.4.10",
+      "installedAt": 1771076004726
+    },
+    "feishu-common": {
+      "version": "1.0.0",
+      "installedAt": 1771076289098
+    }
+  }
+}
