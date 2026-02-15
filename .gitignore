@@ -4,6 +4,16 @@
 .openclaw/openclaw.json.bak*
 memory/*.key
 memory/secrets.md
+memory/secrets.json
+memory/feishu_token.json
+memory/feishu_pending_updates.json
+memory_backup_*/
+
+# 包含 API Keys 的项目文件（测试/开发脚本）
+Project/comfyui-setup/
+
+# 临时测试文件
+temp/
 
 # 上传文件（通常较大）
 uploads/
