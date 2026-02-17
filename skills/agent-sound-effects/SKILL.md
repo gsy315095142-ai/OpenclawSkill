@@ -180,6 +180,34 @@ try {
 | 无声音 | 文件不存在 | 检查 `sounds/` 目录是否有对应 MP3 |
 | 权限错误 | PowerShell 执行策略 | 使用 `Start-Process -ExecutionPolicy Bypass` |
 | COM 错误 | WMP 组件问题 | 使用备用播放方式或忽略 |
+| **播放了但没声音** | **使用了相对路径** | **必须使用绝对路径！** |
+
+#### 相对路径问题详解 ⭐ **2026-02-16 新增**
+
+**问题**：使用 `Set-Location` + 相对路径时，音效不播放
+
+**原因**：
+```powershell
+# ❌ 错误示例
+Set-Location 'C:\Users\31509\clawd\Project\audio'; `
+    Start-Process -FilePath "wmplayer.exe" -ArgumentList "sounds\Mission_Complete.MP3"
+```
+- `Set-Location` 只改变 PowerShell 的当前目录
+- `Start-Process` 启动的 wmplayer.exe **不继承**这个工作目录
+- 相对路径 `sounds\...` 对 wmplayer 来说是相对于它的启动目录（通常是系统目录）
+- 结果：文件找不到，播放失败（静默失败，无错误提示）
+
+**正确做法**：
+```powershell
+# ✅ 使用绝对路径
+Start-Process -FilePath "wmplayer.exe" `
+    -ArgumentList "C:\Users\31509\clawd\Project\audio\sounds\Mission_Complete.MP3" `
+    -WindowStyle Hidden
+```
+
+**教训**：
+> **音效播放 = 必须用绝对路径**
+> Set-Location 只对当前 PowerShell 会话有效，不影响子进程的工作目录
 
 ### 8.2 调试命令
 
@@ -205,13 +233,66 @@ Get-ExecutionPolicy
 
 ---
 
+## 10. 自动播放规范（2026-02-16 新增）
+
+### 10.1 任务完成自动播放
+
+**规则**：每次完成用户布置的任务后，**必须**自动播放完成音效。
+
+**执行方式**：
+```powershell
+# ✅ 正确：使用绝对路径
+Start-Process -FilePath "wmplayer.exe" `
+    -ArgumentList "C:\Users\31509\clawd\Project\audio\sounds\Mission_Complete.MP3" `
+    -WindowStyle Hidden
+
+# ❌ 错误：不要使用相对路径或 Set-Location
+Set-Location 'C:\Users\31509\clawd\Project\audio'; `
+    Start-Process -FilePath "wmplayer.exe" -ArgumentList "sounds\Mission_Complete.MP3"  # 路径解析会失败！
+```
+
+**重要提示**：
+- **必须使用绝对路径** - `Start-Process` 不会继承 `Set-Location` 的工作目录
+- 相对路径会导致文件找不到，播放失败（但不会有错误提示）
+- 绝对路径确保无论在哪里执行都能正确找到文件
+
+### 10.2 播放时机
+
+| 场景 | 播放音效 | 触发条件 |
+|------|---------|---------|
+| 任务全部完成 | `complete` | 每次完成用户布置的事项后自动播放 |
+| 阶段性进展 | `progress` | 完成 Step X 时播放（可选） |
+| 遇到卡点 | `difficulty` | 需要向用户求助时播放 |
+
+### 10.3 示例流程
+
+```
+用户：请帮我创建一个新的 Skill
+
+我：
+1. 创建 Skill 文件
+2. 写入内容
+3. 保存文件
+4. 【自动播放完成音效】
+5. 回复用户："✅ Skill 创建完成！"
+```
+
+### 10.4 注意事项
+
+- **不要遗漏**：即使任务很小（如修改一行配置），也要播放
+- **异步播放**：使用 `-WindowStyle Hidden` 不阻塞回复
+- **失败不阻断**：如果播放失败，不影响任务完成状态
+
+---
+
 ## 总结
 
 **核心口诀**：
-> 卡点用 difficulty，进度用 progress，完成用 complete，文字配合不可少。
+> 卡点用 difficulty，进度用 progress，完成用 complete，**任务完成自动播**。
 
 **关键要点**：
 1. 音效文件放在 `Project/audio/sounds/`
 2. 使用 `Start-Process` 避免 PowerShell 执行策略限制
-3. 异步播放（`-Wait:$false`）不阻塞主流程
-4. 必须配合文字消息，不要只播声音
+3. **每次完成任务后自动播放完成音效**
+4. 异步播放（`-WindowStyle Hidden`）不阻塞主流程
+5. 配合文字消息，不要只播声音
