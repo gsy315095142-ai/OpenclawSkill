@@ -50,5 +50,86 @@ await new Promise(r => setTimeout(r, 2000));
 
 **Key Insight:** `fullPage: true` only captures the viewport area. If viewport height is smaller than actual content, content gets cut off. Must manually set viewport to full content height before screenshot.
 
+## Critical Issue: Correct Sequence for High-Resolution Capture ⭐ **2026-02-17**
+
+**Problem:** Screenshots are blank or contain repeated partial content.
+
+**Root Cause:** Incorrect operation sequence. If you wait first then scale up, the page reloads at the new scale but gets captured before content renders.
+
+### Correct Sequence (MANDATORY)
+
+```
+Step 1: Set scale FIRST (e.g., deviceScaleFactor: 3)
+    ↓
+Step 2: Load the page
+    ↓
+Step 3: WAIT for content to render (CRITICAL!)
+    ↓
+Step 4: Take screenshot
+```
+
+**Wrong Sequence (❌ DO NOT DO THIS):**
+```javascript
+// ❌ BAD: Wait first, then scale
+await page.goto(url);
+await page.waitForTimeout(10000);  // Wait here is wasted!
+await page.setViewport({ deviceScaleFactor: 3 });  // Page reloads!
+await page.screenshot();  // Captures blank/reloading page
+```
+
+**Correct Sequence (✅ DO THIS):**
+```javascript
+// ✅ GOOD: Scale first, then wait, then capture
+const page = await browser.newPage({
+  viewport: { width: 1920, height: 1080, deviceScaleFactor: 3 }  // Scale FIRST
+});
+
+await page.goto('file://...');
+
+// Wait for content to render at the scaled resolution
+await page.waitForTimeout(10000);  // WAIT after scaling!
+
+await page.screenshot({ fullPage: true });
+```
+
+### Wait Time Guidelines
+
+| Content Complexity | Recommended Wait Time | Example |
+|-------------------|----------------------|---------|
+| Simple pages | 3 seconds | Login forms, simple text pages |
+| Medium complexity | 5-7 seconds | Dashboards, standard web pages |
+| **Heavy content** | **10+ seconds** | **Long documentation, complex layouts** |
+| With animations/fonts | +2-3 seconds extra | Pages with CSS animations, web fonts |
+
+**Rule of Thumb:**
+- If screenshot is blank → Increase wait time
+- If content is cut off/repeated → Check viewport height and wait time
+- When in doubt, wait longer (10-15s for complex pages)
+
+### Real-World Example (2026-02-17)
+
+**Scenario:** Capturing a 14,000px tall programming tutorial page.
+
+**Failed Attempt:**
+```javascript
+await page.goto(url);
+await page.waitForTimeout(3000);
+await page.setViewport({ deviceScaleFactor: 3 });  // Too late!
+// Result: Blank screenshot
+```
+
+**Successful Attempt:**
+```javascript
+const page = await browser.newPage({
+  viewport: { width: 1920, height: 1080, deviceScaleFactor: 3 }
+});
+
+await page.goto(url);
+await page.waitForTimeout(10000);  // Wait 10s for heavy content
+
+await page.screenshot({ fullPage: true });
+// Result: Perfect full-page capture
+```
+
 ## History (Failed Attempts)
 - **Method A (Browser Tool):** Blurry because it defaults to `deviceScaleFactor: 1`. Good for functional testing, bad for marketing assets.
